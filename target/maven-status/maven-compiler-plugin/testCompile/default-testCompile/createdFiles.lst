@@ -1,3 +1,4 @@
 za/co/securevault/AssetTest.class
 za/co/securevault/UserTest.class
 za/co/securevault/DatabaseConnectionTest.class
+za/co/securevault/AuthServiceTest.class

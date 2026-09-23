@@ -8,6 +8,9 @@ import za.co.securevault.repository.UserRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 public class UserRepositoryTest {
 
@@ -25,5 +28,27 @@ public class UserRepositoryTest {
         assertNotNull(user);
         assertEquals("admin", user.getUsername());
         assertEquals(Role.ADMIN, user.getRole());
+    }
+        @Test
+    void shouldSaveAndFindAllUsers() throws Exception {
+
+        DatabaseManager databaseManager = new DatabaseManager();
+        UserRepository userRepository = new UserRepository(databaseManager);
+
+        User newUser = new User(
+                0,
+                "testuser_" + System.currentTimeMillis(),
+                "somehash",
+                Role.VIEWER
+        );
+
+        User saved = userRepository.save(newUser);
+
+        assertTrue(saved.getId() > 0);
+
+        List<User> allUsers = userRepository.findAll();
+
+        assertTrue(allUsers.stream()
+                .anyMatch(u -> u.getUsername().equals(newUser.getUsername())));
     }
 }

@@ -1,10 +1,11 @@
-za/co/securevault/model/Vulnerability.class
 za/co/securevault/model/SecurityEvent.class
 za/co/securevault/model/Role.class
 za/co/securevault/model/User.class
 za/co/securevault/model/EventType.class
+za/co/securevault/Main.class
+za/co/securevault/model/VulnerabilityStatus.class
+za/co/securevault/service/AuthService.class
+za/co/securevault/model/Vulnerability.class
 za/co/securevault/model/Severity.class
 za/co/securevault/database/DatabaseManager.class
 za/co/securevault/model/Asset.class
-za/co/securevault/Main.class
-za/co/securevault/model/VulnerabilityStatus.class
