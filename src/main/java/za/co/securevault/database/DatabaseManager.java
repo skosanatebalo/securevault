@@ -7,13 +7,13 @@ import java.sql.SQLException;
 public class DatabaseManager {
 
     private static final String DB_URL =
-            "jdbc:postgresql://localhost:5432/securevault";
+            System.getenv().getOrDefault("DB_URL", "jdbc:postgresql://localhost:5432/securevault");
 
     private static final String DB_USER =
-            "securevault_user";
+            System.getenv().getOrDefault("DB_USER", "securevault_user");
 
     private static final String DB_PASSWORD =
-            "mypassword";
+            System.getenv().getOrDefault("DB_PASSWORD", "mypassword");
 
     public Connection connect() throws SQLException {
         return DriverManager.getConnection(

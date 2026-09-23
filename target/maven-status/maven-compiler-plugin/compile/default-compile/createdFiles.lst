@@ -9,3 +9,5 @@ za/co/securevault/model/Vulnerability.class
 za/co/securevault/model/Severity.class
 za/co/securevault/database/DatabaseManager.class
 za/co/securevault/model/Asset.class
+za/co/securevault/service/AccessControlService.class
+za/co/securevault/model/Action.class

@@ -1,0 +1,39 @@
+stages:
+  - test
+  - build
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  POSTGRES_DB: securevault
+  POSTGRES_USER: securevault_user
+  POSTGRES_PASSWORD: mypassword
+  DB_URL: "jdbc:postgresql://postgres:5432/securevault"
+  DB_USER: securevault_user
+  DB_PASSWORD: mypassword
+
+cache:
+  paths:
+    - .m2/repository
+
+test:
+  stage: test
+  image: maven:3.9-eclipse-temurin-21
+  services:
+    - name: postgres:16
+      alias: postgres
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq postgresql-client
+    - until pg_isready -h postgres -U securevault_user; do sleep 1; done
+    - PGPASSWORD=$POSTGRES_PASSWORD psql -h postgres -U securevault_user -d securevault -f db/init.sql
+  script:
+    - mvn test -B
+
+build:
+  stage: build
+  image: docker:27
+  services:
+    - docker:27-dind
+  script:
+    - docker build -t securevault:$CI_COMMIT_SHORT_SHA .
+  only:
+    - main

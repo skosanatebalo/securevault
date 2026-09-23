@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UserTest {
     @Test 
     void shouldCreateUserCorrectly(){
-        User user = new User(1, "Tebalo", "mypassword", Role.ANALYST);
+        User user = new User(1, "Tebalo", "mypassword", Role.ANALYST, 0, null);
     
     assertEquals(1, user.getId());
     assertEquals("Tebalo", user.getUsername());

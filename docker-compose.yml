@@ -1,0 +1,33 @@
+services:
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: securevault
+      POSTGRES_USER: securevault_user
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U securevault_user -d securevault"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/securevault
+      DB_USER: securevault_user
+      DB_PASSWORD: mypassword
+    stdin_open: true
+    tty: true
+
+volumes:
+  pgdata:

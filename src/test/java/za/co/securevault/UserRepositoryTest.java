@@ -39,7 +39,9 @@ public class UserRepositoryTest {
                 0,
                 "testuser_" + System.currentTimeMillis(),
                 "somehash",
-                Role.VIEWER
+                Role.VIEWER,
+                0,
+                null
         );
 
         User saved = userRepository.save(newUser);
