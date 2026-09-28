@@ -35,4 +35,24 @@ public class AccessControlServiceTest {
         assertFalse(accessControlService.isAllowed(Role.VIEWER, Action.DELETE_ASSET));
         assertFalse(accessControlService.isAllowed(Role.VIEWER, Action.MANAGE_USERS));
     }
+    @Test
+    void adminCanDoAllVulnerabilityActions() {
+        assertTrue(accessControlService.isAllowed(Role.ADMIN, Action.VIEW_VULNERABILITIES));
+        assertTrue(accessControlService.isAllowed(Role.ADMIN, Action.ADD_VULNERABILITY));
+        assertTrue(accessControlService.isAllowed(Role.ADMIN, Action.UPDATE_VULNERABILITY));
+    }
+
+    @Test
+    void analystCanViewAddAndUpdateVulnerabilities() {
+        assertTrue(accessControlService.isAllowed(Role.ANALYST, Action.VIEW_VULNERABILITIES));
+        assertTrue(accessControlService.isAllowed(Role.ANALYST, Action.ADD_VULNERABILITY));
+        assertTrue(accessControlService.isAllowed(Role.ANALYST, Action.UPDATE_VULNERABILITY));
+    }
+
+    @Test
+    void viewerCanOnlyViewVulnerabilities() {
+        assertTrue(accessControlService.isAllowed(Role.VIEWER, Action.VIEW_VULNERABILITIES));
+        assertFalse(accessControlService.isAllowed(Role.VIEWER, Action.ADD_VULNERABILITY));
+        assertFalse(accessControlService.isAllowed(Role.VIEWER, Action.UPDATE_VULNERABILITY));
+    }
 }

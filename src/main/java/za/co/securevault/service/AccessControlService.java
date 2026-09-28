@@ -11,20 +11,19 @@ public class AccessControlService {
 
     private static final Map<Role, Set<Action>> PERMISSIONS = Map.of(
 
-            Role.ADMIN, EnumSet.of(
-                    Action.VIEW_ASSETS,
-                    Action.ADD_ASSET,
-                    Action.DELETE_ASSET,
-                    Action.MANAGE_USERS
-            ),
+            Role.ADMIN, EnumSet.allOf(Action.class),
 
             Role.ANALYST, EnumSet.of(
                     Action.VIEW_ASSETS,
-                    Action.ADD_ASSET
+                    Action.ADD_ASSET,
+                    Action.VIEW_VULNERABILITIES,
+                    Action.ADD_VULNERABILITY,
+                    Action.UPDATE_VULNERABILITY
             ),
 
             Role.VIEWER, EnumSet.of(
-                    Action.VIEW_ASSETS
+                    Action.VIEW_ASSETS,
+                    Action.VIEW_VULNERABILITIES
             )
     );
 

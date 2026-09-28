@@ -9,7 +9,9 @@
 /home/tebalo/personal_project/securevault/src/main/java/za/co/securevault/model/VulnerabilityStatus.java
 /home/tebalo/personal_project/securevault/src/main/java/za/co/securevault/service/AuthService.java
 /home/tebalo/personal_project/securevault/src/main/java/za/co/securevault/repository/UserRepository.java
+/home/tebalo/personal_project/securevault/src/main/java/za/co/securevault/repository/AssetRepository.java
 /home/tebalo/personal_project/securevault/src/main/java/za/co/securevault/model/User.java
 /home/tebalo/personal_project/securevault/src/main/java/za/co/securevault/model/Role.java
+/home/tebalo/personal_project/securevault/src/main/java/za/co/securevault/repository/VulnerabilityRepository.java
 /home/tebalo/personal_project/securevault/src/main/java/za/co/securevault/model/Asset.java
 /home/tebalo/personal_project/securevault/src/main/java/za/co/securevault/database/DatabaseManager.java
