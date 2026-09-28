@@ -13,6 +13,7 @@ import za.co.securevault.repository.UserRepository;
 import za.co.securevault.repository.VulnerabilityRepository;
 import za.co.securevault.service.AccessControlService;
 import za.co.securevault.service.AuthService;
+import za.co.securevault.validation.InputValidator;
 
 import java.io.Console;
 import java.sql.SQLException;
@@ -138,7 +139,15 @@ public class Main {
 
         System.out.print("Owner: ");
         String owner = scanner.nextLine().trim();
-
+        try {
+            InputValidator.validateHostname(hostname);
+            InputValidator.validateIpv4(ipAddress);
+            InputValidator.validateText("Operating system", os, 100);
+            InputValidator.validateText("Owner", owner, 100);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid input: " + e.getMessage());
+            return;
+        }
         Asset newAsset = new Asset(0, hostname, ipAddress, os, owner);
 
         try {
@@ -222,7 +231,13 @@ public class Main {
 
         System.out.print("Description: ");
         String description = scanner.nextLine().trim();
-
+        try {
+            InputValidator.validateText("Title", title, 255);
+            InputValidator.validateText("Description", description, 2000);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid input: " + e.getMessage());
+            return;
+        }
         System.out.print("Severity (LOW, MEDIUM, HIGH, CRITICAL): ");
         String severityInput = scanner.nextLine().trim().toUpperCase();
 
@@ -306,7 +321,13 @@ public class Main {
 
         System.out.print("New password: ");
         String newPassword = scanner.nextLine();
-
+        try {
+            InputValidator.validateUsername(newUsername);
+            InputValidator.validatePassword(newPassword);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid input: " + e.getMessage());
+            return;
+        }
         System.out.print("Role (ADMIN, ANALYST, VIEWER): ");
         String roleInput = scanner.nextLine().trim().toUpperCase();
 

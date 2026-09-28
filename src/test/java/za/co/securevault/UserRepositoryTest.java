@@ -9,6 +9,7 @@ import za.co.securevault.repository.UserRepository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
@@ -52,5 +53,16 @@ public class UserRepositoryTest {
 
         assertTrue(allUsers.stream()
                 .anyMatch(u -> u.getUsername().equals(newUser.getUsername())));
+    }
+	    @Test
+    void createUserShouldRejectInvalidInputBeforeTouchingTheDatabase() {
+
+        UserRepository userRepository = new UserRepository(new DatabaseManager());
+
+        assertThrows(IllegalArgumentException.class,
+                () -> userRepository.createUser("valid_user", "short1", Role.VIEWER));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> userRepository.createUser("bad user!", "LongEnough123", Role.VIEWER));
     }
 }

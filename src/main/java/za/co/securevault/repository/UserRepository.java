@@ -3,6 +3,7 @@ package za.co.securevault.repository;
 import za.co.securevault.database.DatabaseManager;
 import za.co.securevault.model.Role;
 import za.co.securevault.model.User;
+import za.co.securevault.validation.InputValidator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -83,6 +84,9 @@ public class UserRepository {
         }
     }
     public User createUser(String username, String plainPassword, Role role) throws SQLException {
+
+        InputValidator.validateUsername(username);
+        InputValidator.validatePassword(plainPassword);
 
         String hashedPassword = za.co.securevault.security.PasswordUtils.hash(plainPassword);
 
